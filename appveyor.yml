@@ -1,0 +1,22 @@
+environment:
+  NIM_VERSION: "1.0.6"
+  matrix:
+  - nodejs_version: "12.0"
+
+platform:
+  - x64
+
+matrix:
+  fast_finish: true
+
+install:
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:Platform
+  - node --version
+  - npm --version
+  - npm install
+  - npm install -g nim@%NIM_VERSION%
+
+test_script:
+  - npm test
+
+build: off
